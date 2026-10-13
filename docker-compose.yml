@@ -1,0 +1,15 @@
+services:
+  tunnelx:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TUNNELX_LISTEN: 0.0.0.0:8080
+      TUNNELX_DATA_DIR: /var/lib/tunnelx
+    volumes:
+      - tunnelx_data:/var/lib/tunnelx
+    expose:
+      - "8080"
+    # Do not publish 8080 to the public internet; put Caddy/reverse proxy in front.
+volumes:
+  tunnelx_data:

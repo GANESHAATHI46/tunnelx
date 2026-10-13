@@ -1,0 +1,27 @@
+[Unit]
+Description=TunnelX reverse tunnel server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tunnelx
+Group=tunnelx
+WorkingDirectory=/opt/tunnelx
+EnvironmentFile=/etc/tunnelx/tunnelx.env
+Environment=TUNNELX_LISTEN=127.0.0.1:8080
+Environment=TUNNELX_DATA_DIR=/var/lib/tunnelx
+ExecStart=/usr/local/bin/tunnelx-server
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/tunnelx
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

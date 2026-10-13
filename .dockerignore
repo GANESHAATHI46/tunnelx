@@ -1,0 +1,6 @@
+.git
+.data
+.data/
+data/
+dist/
+*.exe
